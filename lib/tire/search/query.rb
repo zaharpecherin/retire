@@ -28,6 +28,10 @@ module Tire
         @value = { :range => { field => value } }
       end
 
+      def function_score(value, options={})
+        @value = { :function_score => value }
+      end
+
       def string(value, options={})
         @value = { :query_string => { :query => value } }
         @value[:query_string].update(options)
