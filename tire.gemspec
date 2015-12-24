@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = Tire::VERSION
   s.platform    = Gem::Platform::RUBY
   s.summary       = "Ruby client for Elasticsearch"
-  s.homepage      = "http://github.com/karmi/tire"
+  s.homepage      = "http://github.com/zaharpecherin/tire"
   s.authors       = [ 'Karel Minarik' ]
   s.email         = 'karmi@karmi.cz'
 
