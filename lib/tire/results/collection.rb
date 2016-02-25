@@ -8,6 +8,13 @@ module Tire
       attr_reader :time, :total, :options, :facets, :max_score, :suggestions
 
       def initialize(response, options={})
+        if options[:shuffle_count]
+          begin
+            response['hits']['hits'] = response['hits']['hits'][0..options[:shuffle_count]-1].shuffle
+            response['hits']['total'] = response['hits']['hits'].count
+          rescue
+          end
+        end
         @response    = response
         @options     = options
         @time        = response['took'].to_i
