@@ -35,6 +35,7 @@ module Tire
             __get_results_with_load(hits)
           end
         end
+        @results.delete_if { |r| r.nil? }
       end
 
       # Iterates over the `results` collection
@@ -161,7 +162,11 @@ module Tire
       end
 
       def __find_records_by_ids(klass, ids)
-        @options[:load] === true ? klass.find(ids) : klass.find(ids, @options[:load])
+        opt = { conditions: ["id IN (?)", ids] }
+        if @options[:load].class.name == "Hash"
+          opt.merge!(@options[:load])
+        end
+        klass.find(:all, opt)
       end
     end
 
