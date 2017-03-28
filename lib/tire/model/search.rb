@@ -142,7 +142,8 @@ module Tire
         #
         def update_index
           instance.run_callbacks :update_elasticsearch_index do
-            if instance.destroyed?
+            if instance.destroyed? || 
+                instance.respond_to?("is_remove_elasticsearch_document?") && instance.is_remove_elasticsearch_document?
               index.remove instance
             else
               @response = index.store( instance, {:percolate => percolator} )
